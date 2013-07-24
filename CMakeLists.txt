@@ -1,0 +1,7 @@
+project(vfs)
+add_subdirectory(libzip-0.11.1)
+add_subdirectory(zlib-1.2.8)
+include_directories(libzip-0.11.1 zlib-1.2.8)
+file(GLOB src ${CMAKE_SOURCE_DIR}/*.h ${CMAKE_SOURCE_DIR}/*.cpp)
+add_executable(vfs_demo ${src})
+target_link_libraries(vfs_demo zlib zip)
