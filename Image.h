@@ -7,10 +7,10 @@ namespace vfs
 	enum ImgFormat
 	{
 		FT_None,
-		FT_RGBA8,
-		FT_RGB8,
-		FT_GRAY8,
-		FT_GRAY_ALPHA8,
+		FT_RGBA,
+		FT_RGB,
+		FT_GRAY,
+		FT_GRAY_ALPHA,
 	};
 
 	class Image
@@ -37,13 +37,13 @@ namespace vfs
 			mData = SOIL_load_image_from_memory(imgData->getPtr(),imgData->size(),&mW,&mH,&channel,SOIL_LOAD_AUTO);
 			assert(mData != 0);
 			if(channel == 1)
-				mFmt = FT_GRAY8;
+				mFmt = FT_GRAY;
 			else if(channel == 2)
-				mFmt = FT_GRAY_ALPHA8;
+				mFmt = FT_GRAY_ALPHA;
 			else if(channel == 3)
-				mFmt =FT_RGB8;
+				mFmt =FT_RGB;
 			else if(channel == 4)
-				mFmt = FT_RGBA8;
+				mFmt = FT_RGBA;
 			else
 				mFmt = FT_None;
 			
@@ -51,13 +51,13 @@ namespace vfs
 		
 		int getChannel(ImgFormat fmt)
 		{
-			if(fmt == FT_GRAY8)
+			if(fmt == FT_GRAY)
 				return 1;
-			else if(fmt == FT_GRAY_ALPHA8)
+			else if(fmt == FT_GRAY_ALPHA)
 				return 2;
-			else if(fmt == FT_RGB8)
+			else if(fmt == FT_RGB)
 				return 3;
-			else if(fmt == FT_RGBA8)
+			else if(fmt == FT_RGBA)
 				return 4;
 			else return 0;
 		}

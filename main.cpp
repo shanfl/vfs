@@ -4,6 +4,7 @@ using std::ifstream;
 #include "Archive.h"
 #include "IniFile.h"
 #include "ResourceGroupMgr.h"
+#include "Image.h"
 
 int main()
 {
@@ -26,12 +27,16 @@ int main()
 	int size = ptr->size();
 	fprintf(stderr,"%s",ptr->getAsString().c_str());
 #endif
+	
 	vfs::IniFile inifile;
 	inifile.load("H:/vfs/RESOURCES_D.CFG");
 
 	using namespace vfs;
 	ResourceGroupManager &rsMgr = ResourceGroupManager::getInstance();
-	rsMgr.addLocation("d:/Particle111.zip","Zip","Particle",true);
+	rsMgr.addLocation("d:/cocos2d-2.0-x-2.0.3.zip","Zip","Particle",true);
 
+	vfs::Image imgii;
+	imgii.load("Particle","CloseNormal.png");
+	imgii.save("d:\\abc.dds","dds");
 	return 1;
 }

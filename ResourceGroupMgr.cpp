@@ -18,7 +18,7 @@ namespace vfs
 		Archive*arc = getArchiveByType(archiveloc,archiveType);
 		assert(arc);
 
-		ResourceGroup*groupPtr = getGroup(groupName);
+		ResourceGroup*groupPtr = getGroup_IfNotExistCreate(groupName);
 		arc->load();
 		StringVecPtr vecPtr = arc->parse(recurse);
 		
@@ -42,16 +42,28 @@ namespace vfs
 			return NULL;
 	}
 
-	ResourceGroup*ResourceGroupManager::getGroup(string name)
+	ResourceGroup*ResourceGroupManager::getGroup_IfNotExistCreate(string name)
 	{
 		std::map<string,ResourceGroup*>::iterator it = mResMap.find(name);
 		if(it == mResMap.end())
 		{
 			ResourceGroup*grp =  new ResourceGroup(name);
 			mResMap[name] = grp;
+			return grp;
 		}
 		else
 			return it->second;
 	}
 
+
+
+	Archive*ResourceGroupManager::findArchive(string groupName,string fileName)
+	{
+		ResourceGroup*grp  = findResourceGroup(groupName);
+		if(!grp)
+		{
+			return 0;
+		}
+		return grp->getArchive(fileName);
+	}
 }
