@@ -57,6 +57,14 @@ namespace vfs
 			}
 		}
 
+		Archive*getArchive(string fileName)
+		{
+			FileListIterType it = filelist.find(fileName);
+			if(it != filelist.end()) 
+				return it->second;
+			return 0;
+		}
+
 	};
 
 
@@ -79,11 +87,19 @@ namespace vfs
 
 		Archive *getArchiveByType(string arcLoc,string archiveType);
 	
-	
+		//  根据组名和文件名找到Archive;
+		Archive*findArchive(string groupName,string fileName);
+
+		ResourceGroup*findResourceGroup(string nameGroup)
+		{
+			std::map<string,ResourceGroup*>::iterator it = mResMap.find(nameGroup);
+			if(it == mResMap.end()) return 0;
+			return it->second;
+		}
 	protected:
 		ResourceGroupManager();
 
-		ResourceGroup*getGroup(string name);
+		ResourceGroup*getGroup_IfNotExistCreate(string name);
 	private:
 		std::map<string,ResourceGroup*> mResMap;
 	};

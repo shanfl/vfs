@@ -136,7 +136,7 @@ namespace vfs
 			WRITE = 2
 		};
 
-
+		
 		DataStream(unsigned short accessMode = READ): mSize(0),mAccess(accessMode)
 		{
 
@@ -146,6 +146,7 @@ namespace vfs
 			: mName(name), mSize(0), mAccess(accessMode) {}
 
 		virtual ~DataStream() {}
+		virtual unsigned char* getPtr(){return 0;}
 
 		string getName(){return mName;}
 		unsigned short getAccess(){return mAccess;}
