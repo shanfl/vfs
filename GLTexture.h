@@ -2,9 +2,15 @@
 #define _gl_texture_h_
 #include "Resource.h"
 #include "SharedPtr.h"
-
+#include "Image.h"
 namespace vfs
 {
+	struct BlendFunc
+	{
+		GLuint dst;
+		GLuint src;
+	};
+
 	class GLTexture : public Resource
 	{
 	public:
@@ -29,18 +35,19 @@ namespace vfs
 			
 		}
 
-		void setFormat(Format ft)
+		void setFormat(ImgFormat ft)
 		{
 			mFormat = ft;
 		}
 	protected:
-		Format mFormat;
+		ImgFormat mFormat;
 		string mSrcName;		// image file name;
 		int	   mW;
 		int	   mH;
 		unsigned int mID;		// gltexture id;
 		unsigned int mTextureMode;
 		unsigned int mBlendMode;
+		BlendFunc mBlendFunc;
 	};
 
 	typedef SharedPtr<GLTexture>GLTexturePtr;
