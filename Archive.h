@@ -56,7 +56,7 @@ namespace vfs
 
 		}
 
-		~Archive()
+		virtual ~Archive()
 		{
 
 		}
@@ -86,10 +86,17 @@ namespace vfs
 		{
 		}
 
+		~FileSystem()
+		{
+			unload();
+		}
+
 		virtual void load()
 		{
 			//listDir(getName().c_str(),mRecurse);
+			parse(true);
 		}
+
 
 		virtual StringVecPtr parse(bool bRecurse)
 		{
@@ -168,6 +175,11 @@ namespace vfs
 			mNumofEntity = 0;
 		}
 
+		~ZipArchive()
+		{
+			unload();
+		}
+
 		virtual void load()
 		{
 			mZip_t = zip_open(getName().c_str(),0,&mErrorCode);
@@ -175,6 +187,7 @@ namespace vfs
 			{
 				mNumofEntity = zip_get_num_entries(mZip_t,ZIP_FL_UNCHANGED);
 			}
+			parse(true);
 		}
 #if 0
 				for(int i = 0; i < num;i++)
