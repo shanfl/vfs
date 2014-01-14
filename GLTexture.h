@@ -5,11 +5,11 @@
 #include "Image.h"
 namespace vfs
 {
-	struct BlendFunc
-	{
-		GLuint dst;
-		GLuint src;
-	};
+	//struct BlendFunc
+	//{
+	//	GLuint dst;
+	//	GLuint src;
+	//};
 
 	class GLTexture : public Resource
 	{
@@ -47,7 +47,7 @@ namespace vfs
 		unsigned int mID;		// gltexture id;
 		unsigned int mTextureMode;
 		unsigned int mBlendMode;
-		BlendFunc mBlendFunc;
+		//BlendFunc mBlendFunc;
 	};
 
 	typedef SharedPtr<GLTexture>GLTexturePtr;

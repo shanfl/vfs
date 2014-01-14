@@ -28,6 +28,16 @@ namespace vfs
 		}
 	}
 
+	void ResourceGroupManager::removeLocation(string archiveloc,string groupName)
+	{
+		std::map<string,ResourceGroup*>::iterator it = mResMap.find(groupName);
+		if(it != mResMap.end())
+		{
+			delete it->second;
+			mResMap.erase(it);
+		}
+	}
+
 	Archive *ResourceGroupManager::getArchiveByType(string arcLoc,string archiveType)
 	{
 		if(archiveType.compare("FileSystem") == 0)
@@ -66,4 +76,18 @@ namespace vfs
 		}
 		return grp->getArchive(fileName);
 	}
+
+	// 初始化一个组
+	void ResourceGroupManager::initGroup(string nameGroup)
+	{
+		ResourceGroup*grp  = findResourceGroup(nameGroup);
+		if(!grp) return;
+	}
+
+	// 初始化所有组
+	void ResourceGroupManager::initAllGroup()
+	{
+
+	}
 }
+

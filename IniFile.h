@@ -119,6 +119,7 @@ namespace vfs
 					grp->insert(key,value);
 				}
 			}
+			return true;
 		}
 	
 		string value(string group,string key)

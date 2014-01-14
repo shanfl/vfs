@@ -49,12 +49,23 @@ namespace vfs
 			else if(it->second == arch)
 			{
 				filelist.erase(it);
+				arch->unload();
 				return true;
 			}
 			else
 			{
 				return false;
 			}
+		}
+
+		bool removeAll()
+		{
+			std::map<std::string,Archive*>::iterator it = filelist.begin();
+			for(;it!= filelist.end();it++)
+			{
+				delete it->second;
+			}
+			filelist.clear();
 		}
 
 		Archive*getArchive(string fileName)
